@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Important FAQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <nav class="fixed top-0 left-0 right-0 z-10 bg-white bg-opacity-70 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-green-500">Donate Bangladesh</h1>
+            <div class="flex items-center space-x-4">
+                <button onclick="window.location.href='index.html'" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Home</button>
+                <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Blog</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Section -->
+    <div class="container mx-auto mt-20 px-4">
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Important FAQ</h2>
+        <div class="space-y-4">
+            <!-- FAQ Item 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button class="w-full text-left px-6 py-4 font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none" onclick="toggleAnswer('answer1')">
+                    What is the Document Object Model (DOM)?
+                </button>
+                <div id="answer1" class="hidden answer px-6 py-4 bg-gray-50">
+                    <p>The DOM is like a big map of a web page. It helps the computer understand the page's structure and allows you to change things on the page using code.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button class="w-full text-left px-6 py-4 font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none" onclick="toggleAnswer('answer2')">
+                    How do you select an element from the DOM?
+                </button>
+                <div id="answer2" class="hidden answer px-6 py-4 bg-gray-50">
+                    <p>You can select an element by its name, like getting a book from a shelf by its title. For example, you can use special words in JavaScript like <code>document.getElementById()</code>.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button class="w-full text-left px-6 py-4 font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none" onclick="toggleAnswer('answer3')">
+                    What is event delegation in the context of the DOM, and why is it useful?
+                </button>
+                <div id="answer3" class="hidden answer px-6 py-4 bg-gray-50">
+                    <p>Event delegation is when you attach a single event listener to a parent element instead of adding one to each child. It makes your code simpler and can improve performance.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <button class="w-full text-left px-6 py-4 font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none" onclick="toggleAnswer('answer4')">
+                    How do you manipulate an element's attributes and styles using the DOM?
+                </button>
+                <div id="answer4" class="hidden answer px-6 py-4 bg-gray-50">
+                    <p>You can change an element's attributes and styles using JavaScript. For example, <code>element.style.color = 'red';</code> changes the text color to red.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(answerId) {
+            const answerElement = document.getElementById(answerId);
+            const allAnswers = document.querySelectorAll('.answer');
+
+            // Hide all answers first
+            allAnswers.forEach(answer => {
+                if (answer !== answerElement) {
+                    answer.classList.add('hidden');
+                }
+            });
+
+            // Toggle the selected answer
+            answerElement.classList.toggle('hidden');
+        }
+    </script>
+</body>
+
+</html>

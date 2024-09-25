@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sticky {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- <nav class="fixed top-0 left-0 right-0 z-10 backdrop-blur-md bg-blue-500 bg-opacity-50 p-4"></nav> -->
+
+    <div class="sticky-header shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4 py-4">
+            <button id="blogButton" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Blog</button>
+            <h1 class="text-2xl font-bold flex items-center space-x-2">
+                <img src="images/logo.png" alt="Icon" class="w-8 h-8"> <!-- Replace with your icon -->
+                <span>Donate Bangladesh</span>
+            </h1>
+            <div class="flex items-center space-x-4">
+                <img src="images/coin.png" alt="Avatar" class="rounded-full">
+                <div class="text-lg font-bold" id="balance">10000 BDT</div>
+            </div>
+        </div>
+        <div class="container mx-auto flex justify-center mb-6 gap-6">
+            <button id="donationButton" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Donation</button>
+            <button id="historyButton" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">History</button>
+        </div>
+    </div>
+
+    
+
+    <!-- Main Donation Section -->
+    <div class="container mx-auto mt-36 px-4" id="donationSection">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="space-y-6">
+
+                <!-- Donation Card 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+                    <img src="images/noakhali.png" alt="Flood in Noakhali" class="rounded-lg mr-6">
+                    <div class="flex-1">
+                        <div class="text-lg font-bold text-green-700 mb-2">Total Collected: <span id="Noakhali Flood">0 BDT</span></div>
+                        <h2 class="text-xl font-semibold mb-2">Donate for Flood at Noakhali, Bangladesh</h2>
+                        <p class="text-gray-700 mb-4">The recent floods in Noakhali have caused significant damage to home infrastructure. Your donation will help provide essential supplies to those affected by this disaster.</p>
+                        <input type="text" id="donationAmountNoakhali" placeholder="Write Donation Amount" class="px-4 py-2 border rounded-lg w-full mb-4">
+                        <button id="donateNoakhali" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 w-full">Donate Now</button>
+                    </div>
+                </div>
+
+                <!-- Donation Card 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+                    <img src="images/feni.png" alt="Flood Relief in Feni" class="rounded-lg mr-6">
+                    <div class="flex-1">
+                        <div class="text-lg font-bold text-green-700 mb-2">Total Collected: <span id="Feni Flood Relief">600 BDT</span></div>
+                        <h2 class="text-xl font-semibold mb-2">Donate for Flood Relief in Feni, Bangladesh</h2>
+                        <p class="text-gray-700 mb-4">The recent floods in Feni have devastated local communities, leading to severe disruption and loss. Your generous donation will help provide immediate aid.</p>
+                        <input type="text" id="donationAmountFeni" placeholder="Write Donation Amount" class="px-4 py-2 border rounded-lg w-full mb-4">
+                        <button id="donateFeni" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 w-full">Donate Now</button>
+                    </div>
+                </div>
+
+                <!-- Donation Card 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+                    <img src="images/quota-protest.png" alt="Aid for Injured" class="rounded-lg mr-6">
+                    <div class="flex-1">
+                        <div class="text-lg font-bold text-green-700 mb-2">Total Collected: <span id="Quota Movement Aid">2400 BDT</span></div>
+                        <h2 class="text-xl font-semibold mb-2">Aid for Injured in the Quota Movement</h2>
+                        <p class="text-gray-700 mb-4">The recent Quota movement has resulted in numerous injuries and significant hardship for many individuals. Your support is crucial in helping them recover.</p>
+                        <input type="text" id="donationAmountQuota" placeholder="Write Donation Amount" class="px-4 py-2 border rounded-lg w-full mb-4">
+                        <button id="donateQuota" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 w-full">Donate Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="container mx-auto mt-36 px-4 hidden" id="historySection">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-6">Your Donation History</h2>
+            <div id="historyList" class="space-y-4">
+                <!-- Donation history will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-xl font-bold">Congrats!</h2>
+            <p class="mt-4">You have donated for humankind successfully.</p>
+            <button onclick="closeSuccessModal()" class="mt-6 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let userBalance = 10000; // Example initial balance
+        document.getElementById("balance").textContent = `${userBalance} BDT`;
+
+        function donate(amount, cause) {
+            const donationAmount = parseInt(amount, 10);
+
+            // Check if the donation amount is a valid positive number
+            if (isNaN(donationAmount) || donationAmount <= 0) {
+                alert("Please enter a valid donation amount.");
+                return;
+            }
+
+            // Check if the user has enough balance
+            if (userBalance < donationAmount) {
+                alert("Insufficient balance.");
+                return;
+            }
+
+            // Deduct the donation amount from the user's balance
+            userBalance -= donationAmount;
+            document.getElementById("balance").textContent = `${userBalance} BDT`;
+
+            // Add the donation amount to the cause
+            const causeElement = document.getElementById(cause);
+            let currentAmount = parseInt(causeElement.textContent, 10);
+            causeElement.textContent = currentAmount + donationAmount + " BDT";
+
+            // Add the donation to the history
+            const now = new Date();
+            const donationEntry = {
+                cause: cause,
+                amount: donationAmount,
+                date: now.toString(),
+            };
+
+            // Save the history to localStorage
+            let donationHistory = JSON.parse(localStorage.getItem("donationHistory")) || [];
+            donationHistory.push(donationEntry);
+            localStorage.setItem("donationHistory", JSON.stringify(donationHistory));
+
+            // Show the success modal
+            showSuccessModal();
+        }
+
+        function showSuccessModal() {
+            const modal = document.getElementById("success-modal");
+            modal.style.display = "flex";
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById("success-modal");
+            modal.style.display = "none";
+        }
+
+        function toggleSections(showHistory) {
+            document.getElementById("donationSection").classList.toggle("hidden", showHistory);
+            document.getElementById("historySection").classList.toggle("hidden", !showHistory);
+            document.getElementById("donationButton").classList.toggle("bg-gray-200", showHistory);
+            document.getElementById("donationButton").classList.toggle("text-gray-800", showHistory);
+            document.getElementById("historyButton").classList.toggle("bg-green-500", showHistory); document.getElementById("historyButton").classList.toggle("text-white", showHistory); }
+            document.getElementById("donationButton").addEventListener("click", function () {
+        toggleSections(false);
+    });
+
+    document.getElementById("historyButton").addEventListener("click", function () {
+        toggleSections(true);
+        populateHistory();
+    });
+
+    // Populate history on page load
+    function populateHistory() {
+        const historyList = document.getElementById("historyList");
+        const donationHistory = JSON.parse(localStorage.getItem("donationHistory")) || [];
+
+        // Clear the current history list
+        historyList.innerHTML = "";
+
+        if (donationHistory.length === 0) {
+            historyList.innerHTML = "<p>No donation history found.</p>";
+            return;
+        }
+
+        donationHistory.forEach(entry => {
+            const historyItem = document.createElement("div");
+            historyItem.className = "bg-gray-50 p-4 rounded-lg shadow-sm";
+            historyItem.innerHTML = `<strong>${entry.amount} BDT</strong> is donated for <em>${entry.cause}</em> on <em>${new Date(entry.date).toLocaleString()}</em>`;
+            historyList.appendChild(historyItem);
+        });
+    }
+
+    // Event listeners for donation buttons
+    document.getElementById("donateNoakhali").addEventListener("click", function () {
+        const amount = document.getElementById("donationAmountNoakhali").value;
+        donate(amount, "Noakhali Flood");
+    });
+
+    document.getElementById("donateFeni").addEventListener("click", function () {
+        const amount = document.getElementById("donationAmountFeni").value;
+        donate(amount, "Feni Flood Relief");
+    });
+
+    document.getElementById("donateQuota").addEventListener("click", function () {
+        const amount = document.getElementById("donationAmountQuota").value;
+        donate(amount, "Quota Movement Aid");
+    });
+    document.getElementById("blogButton").onclick = () => {
+            window.location.href = 'blog.html';
+        };
+        document.getElementById("donationButton").addEventListener("click", () => {
+    // Show donation section and hide history section
+    document.getElementById("donationSection").style.display = "block"; // Show donation section
+    document.getElementById("historySection").style.display = "none"; // Hide history section
+    
+    // Change button colors
+    document.getElementById("donationButton").classList.remove("bg-gray-300", "text-gray-700");
+    document.getElementById("donationButton").classList.add("bg-green-500", "text-white");
+    document.getElementById("historyButton").classList.remove("bg-green-500", "text-white");
+    document.getElementById("historyButton").classList.add("bg-gray-300", "text-gray-700");
+});
+
+document.getElementById("historyButton").addEventListener("click", () => {
+    // Show history section and hide donation section
+    document.getElementById("donationSection").style.display = "none"; // Hide donation section
+    document.getElementById("historySection").style.display = "block"; // Show history section
+    
+    // Change button colors
+    document.getElementById("historyButton").classList.remove("bg-gray-300", "text-gray-700");
+    document.getElementById("historyButton").classList.add("bg-green-500", "text-white");
+    document.getElementById("donationButton").classList.remove("bg-green-500", "text-white");
+    document.getElementById("donationButton").classList.add("bg-gray-300", "text-gray-700");
+});
+
+</script>
+    
